@@ -4,7 +4,7 @@ Disposable Kali Linux containers for Mercury ISS / pentesting engagements.
 Feedback and pull requests are welcome!
 
 # Starting the Kali environment
-  - `./start.sh`
+  - `./start.sh container-name /path/to/data /path/to/scripts /path/to/installers`
   - Hack away
   - `/tmp/.docker.xauth` may have to be removed to restart the container in the event of a new X session.
  

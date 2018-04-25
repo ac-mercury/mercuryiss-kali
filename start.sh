@@ -24,7 +24,7 @@ sudo docker build \
     --build-arg USERNAME=$USERNAME  \
     --build-arg UID=$(id -u) \
     --build-arg GID=$(id -g) \
-    docker/ -t mercuryiss/kali 
+    docker/ -t kalilinux/kali-linux-docker 
 
 # Share X socket with docker container for GUI apps, dirbuster etc.
 # http://wiki.ros.org/docker/Tutorials/GUI - 3. The Isolated Way

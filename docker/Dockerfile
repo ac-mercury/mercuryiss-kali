@@ -5,13 +5,6 @@
 
 FROM kalilinux/kali-linux-docker
 
-# HACK: prepend AARNet mirror so as to circumvent apt-get 404s
-RUN sed -i "s/https\.kali\.org/mirror\.aarnet\.edu\.au\/pub\/kali/g" /etc/apt/sources.list
-
-# update the archive keyring 
-# https://unix.stackexchange.com/questions/421985/invalid-signature-when-trying-to-apt-get-update-on-kali
-RUN wget -q -O - https://archive.kali.org/archive-key.asc  | apt-key add
-
 # get faster mirrors into apt/sources.list
 #RUN apt-get update && apt-get install netselect-apt
 #RUN cp /etc/apt/sources.list /etc/apt/sources.list.bak

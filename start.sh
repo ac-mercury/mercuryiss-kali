@@ -6,10 +6,10 @@
 # Author:       Alexi Chiotis - Mercury ISS
 
 # command line arguments 
-[ -z "$1" ] && echo "No container/hostname supplied." && exit 1
-[ -z "$2" ] && echo "No persistent data path supplied." && exit 1
-[ -z "$3" ] && echo "No scripts path supplied." && exit 1
-[ -z "$4" ] && echo "No installers path supplied." && exit 1
+if [[ -z "$1" || -z "$2" || -z "$3" || -z "$4" ]]; then
+    echo "usage: $0 container-name /path/to/data/ /path/to/scripts/ /path/to/installers/"
+    exit 1
+fi
 
 CNAME="$1"
 DATA_PATH="$2"
@@ -24,7 +24,7 @@ sudo docker build \
     --build-arg USERNAME=$USERNAME  \
     --build-arg UID=$(id -u) \
     --build-arg GID=$(id -g) \
-    docker/ -t kalilinux/kali-linux-docker 
+    docker/ -t mercuryiss/kali 
 
 # Share X socket with docker container for GUI apps, dirbuster etc.
 # http://wiki.ros.org/docker/Tutorials/GUI - 3. The Isolated Way

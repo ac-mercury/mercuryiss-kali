@@ -10,10 +10,12 @@ RUN sed -i "s/https\.kali\.org/mirror\.aarnet\.edu\.au\/pub\/kali/g" /etc/apt/so
 
 # update the archive keyring 
 # https://unix.stackexchange.com/questions/421985/invalid-signature-when-trying-to-apt-get-update-on-kali
-RUN wget -q -O - https://archive.kali.org/archive-key.asc  | apt-key add
+RUN apt-get update && apt-get install -y gnupg curl
+#RUN wget -q -O - https://archive.kali.org/archive-key.asc  | apt-key add
+RUN curl https://archive.kali.org/archive-key.asc | apt-key add
 
 # get faster mirrors into apt/sources.list
-#RUN apt-get update && apt-get install netselect-apt
+#RUN apt-get update && apt-get install -y netselect-apt
 #RUN cp /etc/apt/sources.list /etc/apt/sources.list.bak
 #RUN netselect-apt
 #RUN cp sources.list /etc/apt/sources.list
@@ -56,6 +58,7 @@ RUN apt-get update && apt-get install -y \
 # install those packages that have interactive installation method
 WORKDIR /tmp
 # set up powershell-empire
+RUN apt-get install -y multiarch-support
 RUN wget http://http.us.debian.org/debian/pool/main/o/openssl/libssl1.0.0_1.0.1t-1+deb8u7_amd64.deb
 RUN dpkg -i libssl1.0.0_1.0.1t-1+deb8u7_amd64.deb
 WORKDIR /usr/share

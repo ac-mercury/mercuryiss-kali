@@ -5,6 +5,8 @@
 # Date:         2018-04-18
 # Author:       Alexi Chiotis - Mercury ISS
 
+set -e
+
 # command line arguments 
 [ -z "$1" ] && echo "No container/hostname supplied." && exit 1
 [ -z "$2" ] && echo "No persistent data path supplied." && exit 1

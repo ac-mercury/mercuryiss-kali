@@ -13,6 +13,7 @@ fi
 
 CNAME="$1"
 DATA_PATH="$2"
+mkdir -p "$DATA_PATH"
 SCRIPTS="$3"
 INSTALLERS="$4"
 
@@ -36,8 +37,8 @@ touch $XAUTH
 # mask the first 2 octets with ffff, merge these entries into .docker.xauth
 xauth nlist $DISPLAY | sed -e 's/^..../ffff/' | xauth -f $XAUTH nmerge -
 
-# --rm for ephemeral container, --net host to share host's network stack / /etc/hosts
-sudo docker run -it --hostname "$HNAME" --name "$CNAME"\
+# --rm for ephemeral container, --net=host --privileged to share host's network stack / /etc/hosts
+sudo docker run -it --net host --privileged --hostname "$HNAME" --name "$CNAME"\
     --user "$USERNAME" \
     --volume="$DATA_PATH":/data \
     --volume="$SCRIPTS":/scripts \

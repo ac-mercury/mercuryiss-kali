@@ -1,12 +1,12 @@
 #!/bin/bash
 
 # Name:         start.sh
-# Description:  bring up a mercuryiss/kali docker container
-# Date:         2018-04-18
+# Description:  bring up a mercuryiss/dockerpt docker container
+# Date:         2019-02-15
 # Author:       Alexi Chiotis - Mercury ISS
 
 # command line arguments 
-if [[ -z "$1" || -z "$2" || -z "$3" || -z "$4" ]]; then
+if [[ -z "$4" ]]; then
     echo "usage: $0 container-name /path/to/data/ /path/to/scripts/ /path/to/installers/"
     exit 1
 fi
@@ -21,11 +21,12 @@ HNAME="$CNAME"
 
 # image will be built on first run
 sudo docker build \
-    --build-arg USERNAME=$USERNAME  \
+    --build-arg USERNAME=$USERNAME \
     --build-arg UID=$(id -u) \
     --build-arg GID=$(id -g) \
-    docker/ -t mercuryiss/kali 
+    docker/ -t dockerpt 
 
+echo "Return code was: $?"
 # Share X socket with docker container for GUI apps, dirbuster etc.
 # http://wiki.ros.org/docker/Tutorials/GUI - 3. The Isolated Way
 XSOCK=/tmp/.X11-unix
@@ -45,5 +46,5 @@ sudo docker run -it --hostname "$HNAME" --name "$CNAME"\
     --volume="$XAUTH":"$XAUTH":rw \
     --env="XAUTHORITY=${XAUTH}" \
     --env="DISPLAY" \
-    mercuryiss/kali sh -c "stty cols $(tput cols) rows $(tput lines) && bash"
+    dockerpt sh -c "stty cols $(tput cols) rows $(tput lines) && bash"
 

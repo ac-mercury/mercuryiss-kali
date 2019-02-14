@@ -88,3 +88,4 @@ COPY bashrc .bashrc
 # https://raw.githubusercontent.com/makefu/dnsmap/master/wordlist_TLAs.txt
 COPY dnsmap.txt wordlists/
 
+RUN apt-get install -y iftop wireshark tcpdump traceroute

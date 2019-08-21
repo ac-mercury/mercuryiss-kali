@@ -119,7 +119,8 @@ fi
 export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/lib/x86_64-linux-gnu/gtk-2.0/modules/
 bluebg=$(tput setab 4)
 reset=$(tput sgr0)
-#PS1="\[$bluebg\]\u@\h:\w\[$reset\] "
+reverse=$(tput rev)
+#PS1="\[$bluebg\]\u@\h:\w\[$reset\]\[$reverse\] "
 PS1="\[$bluebg\]\u@\h:\w "
 
 # container wide common history
